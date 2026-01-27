@@ -1,252 +1,205 @@
 # DOKUMENTACJA PROJEKTOWA
 
-Przedmiot: Zagadnienia sieciowe w systemach mobilnych 
+**Przedmiot:** Zagadnienia sieciowe w systemach mobilnych
 
-Część 1 – Projekt koncepcyjny 
+**Temat projektu:** System mobilny kantoru wymiany walut
 
-Temat projektu: System mobilny kantoru wymiany walut 
+## 1. Informacje ogólne
 
-# 1. Informacje ogólne 
+**Nazwa projektu** - Kantor Mobile App
 
-Nazwa projektu 
+**Autorzy projektu** - Miłosz Maniuk, Maciej Mowel
 
- System mobilny kantor
+**Kierunek studiów** - Informatyka Niestacjonarne
 
-Autorzy projektu 
+**Rok / Semestr** - 4 Rok / 7 Semestr
 
- Miłosz Maniuk
- Maciej Mowel
+**Prowadzący** - Marcin Kacprowicz
 
-Kierunek studiów 
+**Data oddania**
 
- Informatyka NST
+## 2. Opis projektu
 
-Rok / Semestr 
+### 2.1. Cel projektu
 
- 4 / 1
+Celem projektu jest stworzenie mobilnej aplikacji kantoru walutowego, umożliwiającej użytkownikom bezpieczną i intuicyjną wymianę walut oraz zarządzanie własnym portfelem finansowym w czasie rzeczywistym.
 
-Prowadzący 
+Aplikacja pozwala na rejestrację i logowanie użytkowników, prezentuje aktualne kursy walut pobierane z zewnętrznego API Narodowego Banku Polskiego oraz umożliwia wykonywanie transakcji kupna i sprzedaży wybranych walut obcych względem waluty PLN. System automatycznie przelicza wartości transakcji na podstawie bieżących kursów oraz weryfikuje dostępność środków użytkownika.
 
- Marcin Kacprowicz
+Użytkownik ma stały dostęp do informacji o stanie swojego portfela, w którym przechowywane są środki w różnych walutach, a także do szczegółowej historii wykonanych operacji finansowych zawierającej datę, typ transakcji, kurs oraz kwoty wymiany.
 
-Data oddania 
+Wartość użytkowa systemu polega na połączeniu funkcji informacyjnych i transakcyjnych w jednej mobilnej aplikacji, która dostarcza aktualnych danych kursowych oraz umożliwia wygodne i przejrzyste zarządzanie środkami finansowymi, wspierając użytkownika w podejmowaniu świadomych decyzji walutowych.
 
- 
+---
 
-# 2. Opis projektu 
+### 2.2. Zakres projektu
 
-2.1. Cel projektu 
+Projekt aplikacji mobilnego kantoru walutowego obejmuje zestaw współpracujących modułów, które tworzą spójny system umożliwiający użytkownikom wymianę walut, zarządzanie portfelem finansowym oraz dostęp do aktualnych danych kursowych w czasie rzeczywistym.
 
-Celem projektu jest stworzenie mobilnej aplikacji MoneyExchange, która wspiera użytkownika w wymianie walut poprzez dostarczanie w czasie rzeczywistym informacji o kursach walut, stanie salda, oraz portfela walut
+---
 
- 
+### 1. Moduł aplikacji mobilnej (Frontend) – React Native (Expo)
 
-Aplikacja automatycznie pobiera na bieżąco kursy walut z NBP.  Po wybraniu zakładki Portfel system pokazuje nam aktualnie posiadane waluty oraz ich ilosci.
+Moduł aplikacji mobilnej stanowi główny interfejs użytkownika, umożliwiający interakcję z systemem kantoru.
 
- 
+Do jego kluczowych funkcji należą:
 
-Użytkownik może sprzedawac lub kupowan wybrane waluty i trzymać je w tak zwanym portfelu internetowym.
+- rejestracja oraz logowanie użytkowników,
 
- 
+- prezentacja aktualnych kursów walut pobieranych z API Narodowego Banku Polskiego,
 
-Dodatkowo system umożliwia śledzenie zmian kursów i na podstawie zmian dokonywać inwestycji. 
+- realizacja operacji kupna i sprzedaży walut obcych względem waluty PLN,
 
- 
+- automatyczne przeliczanie wartości transakcji,
 
-Wartość użytkowa systemu polega na połączeniu funkcji informacyjnych, finansowych i praktycznych w jednym narzędziu, które dostarcza spersonalizowane dane, wspierając użytkownika w planowaniu i bezpiecznym zakupie walut z różnych zakątków świata. 
+- wyświetlanie aktualnego stanu portfela użytkownika,
 
-2.2. Zakres projektu 
+- prezentacja historii wykonanych transakcji,
 
-2.2. Zakres projektu – opis modułów systemu oraz ich roli 
+- obsługa nawigacji pomiędzy widokami aplikacji.
 
- 
+Aplikacja mobilna komunikuje się z warstwą serwerową za pomocą REST API, wykorzystując format danych JSON.
 
-Projekt Personal Data Turist obejmuje zestaw modułów tworzących spójny system, którego celem jest dostarczanie użytkownikowi informacji turystycznych, pogodowych, ekonomicznych i środowiskowych w czasie rzeczywistym. 
+**Technologie:** React Native (Expo), Expo Router, AsyncStorage, Fetch API.
 
- 
+---
 
-⸻ 
+### 2. Moduł serwera aplikacji (Backend) – Node.js + Express
 
- 
+Moduł serwera aplikacji odpowiada za realizację logiki biznesowej systemu oraz pośredniczy w komunikacji pomiędzy aplikacją mobilną a bazą danych.
 
-1. Moduł aplikacji mobilnej (Frontend) – React Native (Expo) 
+Zakres funkcjonalny modułu obejmuje:
 
-•	Główna część interfejsu użytkownika umożliwiająca interakcję z systemem. 
+- obsługę rejestracji i logowania użytkowników,
 
-•	Realizuje kluczowe funkcje: 
+- walidację danych wejściowych oraz kontrolę poprawności operacji finansowych,
 
-•	logowanie i rejestracja użytkownika, 
+- realizację transakcji kupna i sprzedaży walut z zachowaniem spójności danych,
 
-•	pobieranie i wyświetlanie aktualnych kursów, 
+- obsługę zapytań dotyczących sald użytkownika oraz historii transakcji,
 
-•	prezentacja portfela z posiadanymi walutami, 
+- integrację z zewnętrznym API Narodowego Banku Polskiego w celu pobierania aktualnych kursów walut.
 
-•	możliwość wpłaty PLN, 
+Backend zapewnia poprawność i bezpieczeństwo operacji finansowych oraz zwraca dane do aplikacji mobilnej w ujednoliconym formacie JSON.
 
-•	Komunikacja z backendem odbywa się przez REST API w formacie JSON. 
+Technologie: Node.js, Express.js, Prisma ORM.
 
-•	Technologia: React Native (Expo), z wykorzystaniem bibliotek takich jak react-navigation, axios, API. 
+---
 
- 
+### 3. Moduł bazy danych – SQLite (Prisma)
 
-⸻ 
+Moduł bazy danych odpowiada za trwałe przechowywanie informacji niezbędnych do prawidłowego działania systemu kantoru.
 
- 
+W bazie danych przechowywane są m.in.:
 
-2. Moduł serwera aplikacji (Backend) – Node.js + Express 
+- dane użytkowników (konto, dane logowania),
 
-•	Odpowiada za logikę biznesową i pośredniczy między aplikacją mobilną a bazą danych oraz zewnętrznymi API. 
+- informacje o saldach walutowych użytkownika,
 
-•	Realizuje funkcje: 
+- historia transakcji kupna i sprzedaży walut,
 
-•	autoryzacja i uwierzytelnianie użytkowników (JWT), 
+- dane dotyczące kursów użytych w transakcjach.
 
-•	pobieranie i przetwarzanie danych z zewnętrznych API: 
+Struktura bazy danych oparta jest na modelach: User, Balance oraz Transaction, które zapewniają integralność danych oraz jednoznaczne powiązanie użytkownika z jego portfelem i historią operacji.
 
-•	NBP API – kursy walut,  
+Komunikacja z bazą danych realizowana jest za pomocą narzędzia Prisma ORM, które upraszcza obsługę zapytań oraz zarządzanie transakcjami.
 
-•	Odpowiada za wysyłanie danych w ujednoliconym formacie JSON do aplikacji mobilnej. 
+---
 
-•	Zapewnia warstwę bezpieczeństwa oraz kontrolę dostępu do danych użytkownika. 
+### 4. Moduł transakcji finansowych
 
- 
+Moduł transakcji finansowych odpowiada za realizację operacji kupna i sprzedaży walut.
 
-⸻ 
+Do jego zadań należy:
 
- 
+- obliczanie wartości transakcji na podstawie aktualnego kursu waluty,
 
-3. Moduł bazy danych – MySQL 
+- sprawdzanie dostępności środków na koncie użytkownika,
 
-•	Przechowuje dane trwałe aplikacji, takie jak: 
+- aktualizacja sald walutowych po wykonaniu transakcji,
 
-•	informacje o użytkownikach, 
+- zapisywanie szczegółowych informacji o transakcji w historii użytkownika.
 
-•	zapisane kursy, 
+Wszystkie operacje finansowe wykonywane są w ramach transakcji atomowych, co eliminuje ryzyko niezgodności danych w przypadku błędów lub przerwania operacji.
 
-•	portfel z posiadanymi walutami, 
+---
 
-•	ilość pieniedzy na koncie. 
+### 5. Moduł integracji z API zewnętrznymi
 
-•	Struktura bazy danych obejmuje tabele m.in.: 
+Moduł integracji z API zewnętrznymi umożliwia pobieranie aktualnych kursów walut niezbędnych do realizacji transakcji walutowych.
 
-Users, Kursy, Portfel. 
+System wykorzystuje:
 
-•	Komunikacja z backendem realizowana poprzez natywne zapytania SQL. 
+API Narodowego Banku Polskiego (NBP) – do pobierania bieżących kursów walut.
 
- 
+Pobrane dane są przetwarzane i prezentowane użytkownikowi w aplikacji mobilnej, umożliwiając podejmowanie świadomych decyzji finansowych.
 
-⸻ 
+---
 
- 
+### 6. Moduł zarządzania portfelem użytkownika
 
- 
+Moduł zarządzania portfelem umożliwia użytkownikowi bieżący podgląd posiadanych środków w różnych walutach.
 
-6. Moduł integracji z API zewnętrznymi 
+Funkcjonalność modułu obejmuje:
 
-•	Zapewnia komunikację z usługami open-source i publicznymi API: 
- 
-•	NBP API – kursy walut, 
+- prezentację sald wszystkich walut przypisanych do konta użytkownika,
 
-•	Dane są okresowo odświeżane i przechowywane w pamięci podręcznej serwera w celu optymalizacji wydajności. 
+- automatyczne aktualizowanie stanu portfela po wykonaniu transakcji,
 
- 
+- możliwość zasilania konta walutowego w walucie PLN.
 
-System w całości tworzy nowoczesną architekturę klient–serwer, w której: 
+System tworzy nowoczesną architekturę klient–serwer, w której:
 
-•	warstwa mobilna zapewnia wygodny interfejs i doświadczenie użytkownika, 
+- aplikacja mobilna zapewnia intuicyjny i przejrzysty interfejs użytkownika,
 
-•	warstwa serwerowa przetwarza dane i komunikuje się z API, 
+- warstwa serwerowa realizuje logikę biznesową oraz obsługę transakcji,
 
-•	baza danych MySQL gwarantuje trwałość i integralność informacji. 
+- baza danych SQLite gwarantuje trwałość, spójność i integralność danych finansowych.
 
- 
+---
 
-# 3. Wymagania systemowe 
+## 3. Wymagania systemowe
 
-3.1. Wymagania funkcjonalne 
+### 3.1. Wymagania funkcjonalne
 
-Tabela przedstawiająca wszystkie funkcje systemu: 
+Tabela przedstawiająca wszystkie funkcje systemu.
 
-ID 
+### 3.2. Wymagania niefunkcjonalne
 
-Nazwa funkcji 
+Opis wymagań dotyczących jakości systemu.
 
-Opis działania 
+## 4. Diagramy UML
 
-Priorytet 
+### 4.1. Diagram przypadków użycia
 
-F1 
+Wstaw diagram przedstawiający interakcje między użytkownikiem a systemem.
 
-Rejestracja użytkownika 
+### 4.2. Diagram klas
 
-Użytkownik może utworzyć konto 
+Przedstaw strukturę logiczną systemu – główne klasy, atrybuty, relacje.
 
-Wysoki 
+## 5. Projekt bazy danych
 
-3.2. Wymagania niefunkcjonalne 
+Model ERD (Entity-Relationship Diagram), opis tabel i relacji, klucze główne, obce, typy danych.
 
-Opis wymagań dotyczących jakości systemu: 
+## 6. Architektura systemu
 
-ID 
+Opis wzajemnych powiązań między modułami aplikacji oraz schemat logiczny przepływu danych.
 
-Nazwa 
+## 7. Plan realizacji projektu
 
-Opis 
+## 8. Wnioski i możliwe rozszerzenia
 
-Kategoria 
+Opis potencjalnych funkcjonalności dodatkowych lub usprawnień, które mogą zostać dodane po ukończeniu projektu.
 
-N1 
+## 9. Źródła
 
-Wydajność 
-
-Czas odpowiedzi systemu ≤ 2 s 
-
-Wydajność 
-
-4. Diagramy UML 
-
-4.1. Diagram przypadków użycia 
-
-Wstaw diagram przedstawiający interakcje między użytkownikiem a systemem. 
-
-4.2. Diagram klas 
-
-Przedstaw strukturę logiczną systemu – główne klasy, atrybuty, relacje. 
-
-# 5. Projekt bazy danych 
-
-Model ERD (Entity-Relationship Diagram), opis tabel i relacji, klucze główne, obce, typy danych. 
-
-# 6. Architektura systemu 
-
-Opis wzajemnych powiązań między modułami aplikacji oraz schemat logiczny przepływu danych. 
-
-# 7. Plan realizacji projektu 
-
-Etap 
-
-Opis 
-
-Termin 
-
-Osoba odpowiedzialna 
-
-1 
-
-Analiza wymagań 
-
- 
-
- 
-
-# 8. Wnioski i możliwe rozszerzenia 
-
-Opis potencjalnych funkcjonalności dodatkowych lub usprawnień, które mogą zostać dodane po ukończeniu projektu. 
-
-# 9. Źródła 
+https://api.nbp.pl/
 
 https://docs.expo.dev/
+
 https://expressjs.com/
-https://api.nbp.pl/
+
 https://nodejs.org/api/all.html
-//dodać baze danych
+
+https://www.sqlite.org/docs.html
