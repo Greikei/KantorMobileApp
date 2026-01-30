@@ -223,7 +223,7 @@ https://www.sqlite.org/docs.html
    ```
 4. Uruchomienie servera i Expo
    ```sh
-   npm start dev
+   npm run dev
    ```
 5. Otwarcie aplikacji
    ```sh
