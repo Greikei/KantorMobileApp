@@ -4,6 +4,7 @@ const { PrismaClient } = require("@prisma/client");
 
 const app = express();
 const prisma = new PrismaClient();
+const address = require('address');
 const PORT = 3000;
 
 app.use(cors());
@@ -152,6 +153,8 @@ app.post("/topup", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Serwer działa na porcie ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Serwer działa na: http://${address.ip()}:${PORT}`);
 });
+
+

@@ -1,4 +1,9 @@
-const API_URL = "http://192.168.1.12:3000";
+import Constants from 'expo-constants';
+import { Platform } from 'react-native';
+
+const debuggerHost = Constants.expoConfig?.hostUri?.split(':')[0];
+const API_URL = Platform.OS === 'web' ? "http://localhost:3000" : `http://${debuggerHost}:3000`;
+
 
 export const initDatabase = async () => {
   console.log("🔗 API:", API_URL);
