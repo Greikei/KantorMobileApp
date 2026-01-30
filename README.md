@@ -203,3 +203,29 @@ https://expressjs.com/
 https://nodejs.org/api/all.html
 
 https://www.sqlite.org/docs.html
+
+
+
+
+##  Instalacja:
+
+1. Skopiuj repozytorium
+   ```sh
+   git clone https://github.com/Greikei/KantorMobileApp.git
+   ```
+2. Instalacja pakietów NPM
+   ```sh
+   npm install
+   ```
+3. Instalacja Expo
+   ```sh
+   npx expo install
+   ```
+4. Uruchomienie servera i Expo
+   ```sh
+   npm run dev
+   ```
+5. Otwarcie aplikacji
+   ```sh
+   Klikając przycisk A lub skanując kod QR na swoim telefonie
+   ```
