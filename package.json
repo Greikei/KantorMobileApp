@@ -10,7 +10,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
-    "dev": "  node server/server.js &&  npx expo start"
+    "dev": "npx expo start & node /server/server.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
