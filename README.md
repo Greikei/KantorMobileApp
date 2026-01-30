@@ -221,11 +221,33 @@ https://www.sqlite.org/docs.html
    ```sh
    npx expo install
    ```
-4. Uruchomienie servera i Expo
+ ##  Uruchomienie servera:
+   
+4.1 Przejście do folderu: Sever w terminalu 
    ```sh
-   npm run dev
+   cd server
    ```
-5. Otwarcie aplikacji
+4.2 Inicjacja servera Node 
    ```sh
-   Klikając przycisk A lub skanując kod QR na swoim telefonie
+   node server.js
    ```
+   ##  Uruchomienie clienta:
+5.1 Uruchomienie Expo
+   ```sh
+   npx expo start
+   ```
+5.2 Uruchomienie aplikacji Webowo lub na telefonie
+ 
+   Web:
+ ```sh
+   Z gui EXPO wybieramy web wciskając litere W na klawiaturze
+   ```
+   Emulator:
+   ```sh
+Z gui EXPO wybieramy android wciskając literę A na klawiaturze
+   ```
+   Telefon:
+   ```sh
+   Skanujemy kod QR z terminala
+   ```
+   
