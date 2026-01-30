@@ -1,9 +1,11 @@
-import Constants from 'expo-constants';
-import { Platform } from 'react-native';
+import Constants from "expo-constants";
+import { Platform } from "react-native";
 
-const debuggerHost = Constants.expoConfig?.hostUri?.split(':')[0];
-const API_URL = Platform.OS === 'web' ? "http://localhost:3000" : `http://${debuggerHost}:3000`;
-
+const debuggerHost = Constants.expoConfig?.hostUri?.split(":")[0];
+const API_URL =
+  Platform.OS === "web"
+    ? "http://localhost:3000"
+    : `http://${debuggerHost}:3000`;
 
 export const initDatabase = async () => {
   console.log("🔗 API:", API_URL);
@@ -49,6 +51,18 @@ export const getTransactions = async (userId) => {
   }
 };
 
+export const getRates = async () => {
+  const res = await fetch(`${API_URL}/rates`);
+  if (!res.ok) throw new Error("Błąd pobierania kursów");
+  return await res.json();
+};
+
+export const getArchivedRates = async (date) => {
+  const res = await fetch(`${API_URL}/rates/${date}`);
+  if (!res.ok) throw new Error("Brak kursów dla tej daty");
+  return await res.json();
+};
+
 export const addBalance = async (userId) => {
   await fetch(`${API_URL}/topup`, {
     method: "POST",
@@ -57,17 +71,11 @@ export const addBalance = async (userId) => {
   });
 };
 
-export const addTransaction = async (
-  userId,
-  type,
-  currency,
-  amountInput,
-  rate,
-) => {
+export const addTransaction = async (userId, type, currency, amountInput) => {
   const res = await fetch(`${API_URL}/transaction`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ userId, type, currency, amountInput, rate }),
+    body: JSON.stringify({ userId, type, currency, amountInput }),
   });
   const data = await res.json();
   if (!res.ok) throw new Error(data.error || "Błąd");

@@ -1,14 +1,31 @@
 const express = require("express");
 const cors = require("cors");
 const { PrismaClient } = require("@prisma/client");
+const address = require("address");
 
 const app = express();
 const prisma = new PrismaClient();
-const address = require('address');
 const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
+
+const fetchNBP = async (date = null) => {
+  const url = date
+    ? `https://api.nbp.pl/api/exchangerates/tables/A/${date}/?format=json`
+    : "https://api.nbp.pl/api/exchangerates/tables/A/?format=json";
+
+  const res = await fetch(url);
+
+  if (!res.ok) {
+    throw new Error("Brak notowań dla wybranej daty (lub błąd NBP).");
+  }
+
+  const data = await res.json();
+  const codes = ["USD", "EUR", "GBP", "CHF", "CAD", "NOK"];
+
+  return data[0].rates.filter((r) => codes.includes(r.code));
+};
 
 app.post("/register", async (req, res) => {
   const { login, password } = req.body;
@@ -65,14 +82,43 @@ app.get("/transactions/:userId", async (req, res) => {
   res.json(formatted);
 });
 
-app.post("/transaction", async (req, res) => {
-  const { userId, type, currency, amountInput, rate } = req.body;
+app.get("/rates", async (req, res) => {
+  try {
+    const rates = await fetchNBP();
+    res.json(rates);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
 
-  console.log(
-    `🔄 Transakcja: User ${userId}, Typ ${type}, Waluta ${currency}, Kwota ${amountInput}`,
-  );
+app.get("/rates/:date", async (req, res) => {
+  try {
+    const rates = await fetchNBP(req.params.date);
+    res.json(rates);
+  } catch (_e) {
+    res
+      .status(404)
+      .json({ error: "Brak danych dla tej daty (np. weekend/święto)" });
+  }
+});
+
+app.post("/transaction", async (req, res) => {
+  const { userId, type, currency, amountInput } = req.body;
 
   try {
+    const rates = await fetchNBP();
+    const rateObj = rates.find((r) => r.code === currency);
+
+    if (!rateObj) {
+      throw new Error(`Nieobsługiwana waluta: ${currency}`);
+    }
+
+    const rate = rateObj.mid;
+
+    console.log(
+      `🔄 Transakcja: User ${userId}, Typ ${type}, Waluta ${currency}, Kwota ${amountInput}, Kurs NBP: ${rate}`,
+    );
+
     await prisma.$transaction(async (tx) => {
       let plnRecord = await tx.balance.findUnique({
         where: { userId_currency: { userId, currency: "PLN" } },
@@ -153,8 +199,6 @@ app.post("/topup", async (req, res) => {
   }
 });
 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Serwer działa na: http://${address.ip()}:${PORT}`);
 });
-
-

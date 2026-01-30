@@ -59,14 +59,20 @@ export default function RootLayout() {
       <Stack.Screen
         name="wallet"
         options={{
-          title: "Portfel",
+          title: "Twój Portfel",
         }}
       />
 
       <Stack.Screen
         name="history"
         options={{
-          title: "Historia",
+          title: "Historia Transakcji",
+        }}
+      />
+      <Stack.Screen
+        name="archive"
+        options={{
+          title: "Archiwum Kursów",
         }}
       />
     </Stack>

@@ -15,6 +15,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import {
   addBalance,
   addTransaction,
+  getRates,
   getUserBalances,
 } from "../services/database";
 
@@ -48,15 +49,11 @@ export default function Home() {
 
   const fetchRates = async () => {
     try {
-      const res = await fetch(
-        "https://api.nbp.pl/api/exchangerates/tables/A/?format=json",
-      );
-      const data = await res.json();
-      const codes = ["USD", "EUR", "GBP", "CHF", "CAD", "NOK"];
-      setRates(data[0].rates.filter((r) => codes.includes(r.code)));
+      const data = await getRates();
+      setRates(data);
       setLoading(false);
     } catch (_e) {
-      Alert.alert("Błąd", "Brak kursów NBP");
+      Alert.alert("Błąd", "Nie udało się pobrać kursów z serwera");
     }
   };
 
@@ -68,7 +65,7 @@ export default function Home() {
     if (!rate) return Alert.alert("Błąd", "Brak kursu");
 
     try {
-      await addTransaction(userId, txType, targetCurrency, val, rate);
+      await addTransaction(userId, txType, targetCurrency, val);
       Alert.alert("Sukces", "Transakcja udana!");
       setAmount("");
       refresh(userId);
@@ -202,9 +199,16 @@ export default function Home() {
             <Text style={styles.white}>Portfel</Text>
           </TouchableOpacity>
         </Link>
+
         <Link href="/history" asChild>
           <TouchableOpacity style={styles.navBtn}>
             <Text style={styles.white}>Historia</Text>
+          </TouchableOpacity>
+        </Link>
+
+        <Link href="/archive" asChild>
+          <TouchableOpacity style={styles.navBtn}>
+            <Text style={styles.white}>Archiwum</Text>
           </TouchableOpacity>
         </Link>
       </View>
