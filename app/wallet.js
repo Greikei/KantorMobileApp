@@ -15,7 +15,6 @@ export default function Wallet() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Twój Portfel</Text>
       <FlatList
         data={Object.keys(balances)}
         keyExtractor={(i) => i}
