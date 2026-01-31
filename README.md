@@ -1,86 +1,85 @@
-<a name="readme-top"></a>
-
 # Kantor Mobile App
 
-##  O projekcie:
+Mobilna aplikacja do symulacji wymiany walut w czasie rzeczywistym. Projekt wykorzystuje **React Native (Expo)** po stronie klienta oraz **Node.js** z bazą **SQLite** po stronie serwera. Aplikacja pobiera aktualne kursy walut bezpośrednio z API **Narodowego Banku Polskiego (NBP)**.
 
-Prosta aplikacja wykorzystująca API Narodowego Banku Polskiego do szybkiej i intuicyjnej wymiany walut.
+---
 
-##  Technologie i narzędzia
+## Funkcjonalności
 
-- **React Native (Expo)** – Framework do budowy natywnych aplikacji mobilnych
-- **Expo Router / React Navigation** – Zarządzanie nawigacją.
-- **Context API** – Funkcjonalność Reacta do zarządzania globalnym stanem aplikacji
-- **Node.js + Express.js** – Środowisko uruchomieniowe i framework serwerowy.
-- **Prisma ORM** – Narzędzie do mapowania obiektowo-relacyjnego i komunikacji z bazą.
-- **SQLite** – Relacyjna baza danych do przechowywania kont i transakcji.
+- **Autoryzacja:** Rejestracja i logowanie użytkowników.
+- **Kursy Live:** Pobieranie aktualnych tabel kursowych z API NBP.
+- **Transakcje:** Kupno i sprzedaż walut oraz ich przeliczanie w czasie rzeczywistym.
+- **Portfel:** Podgląd salda dla PLN oraz posiadanych walut obcych (USD, EUR, GBP, CHF, CAD, NOK).
+- **Historia:** Pełny rejestr operacji z datą, kursem i kwotą.
+- **Archiwum:** Możliwość sprawdzenia kursów walut z dowolnej daty w przeszłości.
+- **Doładowanie:** Symulacja zasilania konta PLN.
 
-##  Instalacja:
+---
 
-1. Skopiuj repozytorium
-   ```sh
-   git clone https://github.com/Greikei/KantorMobileApp.git
-   ```
-2. Instalacja pakietów NPM
-   ```sh
-   npm install
-   ```
-3. Instalacja Expo
-   ```sh
-   npx expo install
-   ```
- ##  Uruchomienie servera:
-   
-4.1 Przejście do folderu: Sever w terminalu 
-   ```sh
-   cd server
-   ```
-4.2 Inicjacja servera Node 
-   ```sh
-   node server.js
-   ```
-   ##  Uruchomienie clienta:
-5.1 Uruchomienie Expo
-   ```sh
-   npx expo start
-   ```
-5.2 Uruchomienie aplikacji Webowo lub na telefonie
- 
-   Web:
- ```sh
-   Z gui EXPO wybieramy web wciskając litere W na klawiaturze
-   ```
-   Emulator:
-   ```sh
-Z gui EXPO wybieramy android wciskając literę A na klawiaturze
-   ```
-   Telefon:
-   ```sh
-   Skanujemy kod QR z terminala
-   ```
+## Technologie
 
-##  Funkcjonalność
+### Frontend (Mobile)
 
-- Autoryzacja użytkowników – rejestracja nowych kont oraz bezpieczne logowanie do systemu.
-- Pobieranie kursów walut live – integracja z API NBP w celu wyświetlania aktualnych cen kupna i sprzedaży.
-- Realizacja transakcji – moduł kupna i sprzedaży walut obcych względem złotówki (PLN).
-- Zarządzanie portfelem – podgląd aktualnego stanu posiadanych środków w różnych walutach.
-- Historia transakcji – pełny wgląd w listę archiwalnych operacji finansowych (data, kurs, kwota).
+- **Framework:** React Native (Expo SDK)
+- **Routing:** Expo Router (File-based routing)
+- **Komunikacja:** Fetch API
+- **Storage:** Async Storage
 
+### Backend (Server)
 
-##  Autorzy
+- **Runtime:** Node.js + Express.js
+- **Baza danych:** SQLite
+- **ORM:** Prisma
+- **API:** NBP Web API
 
-- Maciej Mowel
+---
 
-```sh
-42935
+## Instalacja i Uruchomienie
+
+### Krok 1: Klonowanie repozytorium
+
+```
+git clone https://github.com/Greikei/KantorMobileApp.git
+
+cd KantorMobileApp
 ```
 
-- Miłosz Maniuk
+### Krok 2: Instalacja zależności
 
-```sh
-44687
+```
+npm install
+
+cd server
+
+npm install
 ```
 
-<p align="right">(<a href="#readme-top">Powrót</a>)</p>
+### Krok 3: Konfiguracja Bazy Danych
 
+```
+npx prisma generate
+
+npx prisma migrate dev
+```
+
+### Krok 3: Uruchomienia Serwera
+
+```
+node server.js
+```
+
+### Krok 4: Uruchomienie Aplikacji
+
+```
+npx expo start
+```
+
+## Autorzy
+
+```
+Maciej Mowel - 42935
+```
+
+```
+Miłosz Maniuk - 44687
+```
