@@ -12,12 +12,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  addBalance,
-  addTransaction,
-  getRates,
-  getUserBalances,
-} from "../server/database";
+import { addBalance, addTransaction, getRates, getUserBalances } from "./api";
 
 export default function Home() {
   const router = useRouter();

@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { getArchivedRates } from "../server/database";
+import { getArchivedRates } from "./api";
 
 export default function Archive() {
   const [date, setDate] = useState("");

@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Stack, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Alert, Text, TouchableOpacity, View } from "react-native";
-import { initDatabase } from "../server/database";
+import { initDatabase } from "./api";
 
 export default function RootLayout() {
   const [ready, setReady] = useState(false);
