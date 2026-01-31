@@ -71,6 +71,8 @@ node server.js
 ### Krok 4: Uruchomienie Aplikacji
 
 ```
+cd ..
+
 npx expo start
 ```
 
