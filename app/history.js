@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { getTransactions } from "../services/database";
+import { getTransactions } from "../server/database";
 
 export default function History() {
   const [history, setHistory] = useState([]);

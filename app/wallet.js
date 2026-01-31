@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { getUserBalances } from "../services/database";
+import { getUserBalances } from "../server/database";
 
 export default function Wallet() {
   const [balances, setBalances] = useState({});

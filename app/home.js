@@ -17,7 +17,7 @@ import {
   addTransaction,
   getRates,
   getUserBalances,
-} from "../services/database";
+} from "../server/database";
 
 export default function Home() {
   const router = useRouter();

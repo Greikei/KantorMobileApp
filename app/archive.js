@@ -1,16 +1,16 @@
 // app/archive.js
 import { useState } from "react";
 import {
-    ActivityIndicator,
-    Alert,
-    FlatList,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import { getArchivedRates } from "../services/database";
+import { getArchivedRates } from "../server/database";
 
 export default function Archive() {
   const [date, setDate] = useState("");
